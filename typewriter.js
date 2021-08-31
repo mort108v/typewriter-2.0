@@ -11,18 +11,49 @@ const charTwoSound = document.getElementById("typekey2");
 const spaceSound = document.getElementById("typespace");
 const lastKeySound = document.getElementById("typelast");
 const returnSound = document.getElementById("typereturn");
-const soundButton = document.getElementsByClassName("button");
-const sounds = document.getElementById("sounds");
+const soundButtonOn = document.getElementById("on");
+const soundButtonOff = document.getElementById("off");
+const sounds = document.querySelectorAll("audio");
 
 document.addEventListener("DOMContentLoaded", init);
+
+function mutePage() {
+    console.log("Muting page");
+    sounds.forEach.call(sounds, function(sounds) {
+        muteMe(sounds);
+    });
+}
+
+function unMutePage() {
+    console.log("Muting page");
+    sounds.forEach.call(sounds, function(sounds) {
+        unMuteMe(sounds);
+    });
+}
+// Mute a singular HTML5 element
+function muteMe(elem) {
+    elem.muted = true;
+}
+
+function unMuteMe(elem) {
+    elem.muted = false;
+}
 
 function init() {
     console.log("init");
 
-    // Mute sound on Load
-    sounds.play = false;
+    // Sound stuff  
+    mutePage(sounds);
 
-    // Festch txt from HTML
+    soundButtonOn.onclick = function() {
+        console.log("On BTN clicked");
+        unMutePage(sounds);
+    };
+    soundButtonOff.onclick = function() {
+        console.log("Off BTN clicked");
+        mutePage(sounds);
+    };
+    // Fetch txt from HTML
     typed = typedText.innerHTML;
     // Clear fetched text
     typedText.innerHTML = "";
